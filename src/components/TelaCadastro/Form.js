@@ -16,6 +16,7 @@ export default function Form(){
         setEmail('');
         setSenha('');
         setNome('');
+        setEndereco('');
         setSenhaConfirmar('');
     }
     async function cadastrando(e){
@@ -23,9 +24,10 @@ export default function Form(){
         try{
             if(senha === senhaConfirmar){
                 await axios.post('http://localhost:5000/cadastro', {
-                name: nome,
+                nome: nome,
                 email: email,
-                password: senha
+                endereco: endereco,
+                senha: senha
                 });
                 navigate('/');
             }
@@ -35,7 +37,12 @@ export default function Form(){
             }
         }
         catch(e){
-            alert('Falha na criação do usuário!');
+            if(e.response.status == 409){
+                alert('Email já cadastrado!');
+            }
+            else{
+                alert('Falha na criação do usuário!');
+            }
             setarCampos();
         }
     }

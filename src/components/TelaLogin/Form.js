@@ -7,7 +7,7 @@ import UserContext from '../contexts/UserContext';
 export default function Form(){
 
     const {token, setToken} = useContext(UserContext);
-    const {name, setName} = useContext(UserContext);
+    const {endereco, setEndereco} = useContext(UserContext);
     const [email, setEmail] = React.useState('');
     const [senha, setSenha] = React.useState('');
 
@@ -21,12 +21,13 @@ export default function Form(){
         try{
             const response = await axios.post('http://localhost:5000/login', {
                 email: email,
-                password: senha
+                senha: senha
             });
             if(response.data){
+                console.log(response.data)
                 setToken(response.data.token);
-                setName(response.data.user);
-                navigate('/registros');
+                setEndereco(response.data.endereco);
+                navigate('/inicio');
             }
             else{
                 alert('E-mail ou senha inválidos!');
@@ -34,9 +35,7 @@ export default function Form(){
             }
         }
         catch(e){
-            console.log(e)
             alert('Falha na autenticação!');
-            setarCampos();
         }
     }
 
