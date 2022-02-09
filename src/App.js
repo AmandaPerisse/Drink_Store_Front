@@ -6,6 +6,7 @@ import './styles/style.css';
 
 import Login from './components/TelaLogin/Login';
 import Cadastro from './components/TelaCadastro/Cadastro';
+import TelaInicial from './components/TelaInicial/TelaInicial';
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
         <Routes>
             <Route path="/" element={<Login/>}></Route>
             <Route path="/cadastro" element={<Cadastro/>}></Route>
+            <Route path="/inicio" element={<TelaInicial/>}></Route>
         </Routes>
       </UserContext.Provider>
     </BrowserRouter>
