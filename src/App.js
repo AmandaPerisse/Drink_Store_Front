@@ -1,8 +1,11 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import UserContext from './components/contexts/UserContext';
+import './styles/reset.css';
+import './styles/style.css';
 
 import Login from './components/TelaLogin/Login';
-import Login from './components/TelaCadastro/Cadastro';
+import Cadastro from './components/TelaCadastro/Cadastro';
 
 function App() {
 

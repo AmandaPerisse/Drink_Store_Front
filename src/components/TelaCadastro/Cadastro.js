@@ -8,11 +8,13 @@ import Logo from '../Imgs/Logo';
 export default function Cadastro(){
 
     return (
-        <Alinhar>
-            <Logo />
-            <Form />
-            <Logar />
-        </Alinhar>
+        <Completo>
+            <Alinhar>
+                <Logo />
+                <Form />
+                <Logar />
+            </Alinhar>
+        </Completo>
     );
 }
 const Alinhar = styled.div`
@@ -24,5 +26,8 @@ const Alinhar = styled.div`
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%)
-    
+`;
+const Completo = styled.div`
+    background-color: #4720D4;
+    height: 100vh;
 `;

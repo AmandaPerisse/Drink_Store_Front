@@ -13,7 +13,7 @@ export default function Logar(){
         </Link>
     );
 }
-const Texto = styled.h5`
+const Texto = styled.h4`
     margin-top: 20px;
     color: white;
 `;

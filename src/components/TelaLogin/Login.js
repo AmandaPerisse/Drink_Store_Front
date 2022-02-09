@@ -8,13 +8,13 @@ import Cadastrar from "./Cadastrar";
 export default function Login(){
 
     return (
-        <>
+        <Completo>
             <Fundo>
                <Logo />
                <Form />
                <Cadastrar />
             </Fundo>
-        </>
+        </Completo>
     );
 }
 const Fundo = styled.div`
@@ -26,4 +26,8 @@ const Fundo = styled.div`
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%);
+`;
+const Completo = styled.div`
+    background-color: #4720D4;
+    height: 100vh;
 `;

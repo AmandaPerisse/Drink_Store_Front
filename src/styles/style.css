@@ -27,6 +27,11 @@ h3{
     font-size: 18px;
     font-weight: normal;
 }
+h4{
+    font-family: 'Raleway', sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+}
 button{
     cursor: pointer;
     background: transparent;
@@ -40,7 +45,8 @@ input{
     margin-top: 10px;
 }
 input::placeholder{
-    font-size: 20px;
-    color: #000;
+    font-size: 18px;
     padding: 5px;
+    color: #A4A4A4;
+    font-style: italic;
 }

@@ -63,11 +63,11 @@ const Formulario = styled.form`
     }
 `;
 const Botao = styled.button`
-	background-color: #A328D6;
+	background-color: #D9BF57;
     margin-top: 20px;
     width: 100%;
     height: 46px;
-    border-radius: 4.63636px;
+    border-radius: 100px;
     h2{
         color: white;
     }

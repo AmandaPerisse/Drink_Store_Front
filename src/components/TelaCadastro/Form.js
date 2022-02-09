@@ -8,6 +8,7 @@ export default function Form(){
     const [email, setEmail] = React.useState('');
     const [senha, setSenha] = React.useState('');
     const [nome, setNome] = React.useState('');
+    const [endereco, setEndereco] = React.useState('');
     const [senhaConfirmar, setSenhaConfirmar] = React.useState('');
     
     const navigate = useNavigate();
@@ -45,6 +46,7 @@ export default function Form(){
             <Formulario onSubmit = {cadastrando}>
                 <input type="text" onChange = {(e) => setNome(e.target.value)} value = {nome} placeholder='Nome' />
                 <input type="email" onChange = {(e) => setEmail(e.target.value)} value = {email} placeholder='E-mail'/>
+                <input type="text" onChange = {(e) => setEndereco(e.target.value)} value = {endereco} placeholder='Endereço' />
                 <input type="password" onChange = {(e) => setSenha(e.target.value)} value = {senha} placeholder='Senha'/>
                 <input type="password" onChange = {(e) => setSenhaConfirmar(e.target.value)} value = {senhaConfirmar} placeholder='Confirme a senha'/>
                 <Botao type="submit">
@@ -64,11 +66,11 @@ const Formulario = styled.form`
     }
 `;
 const Botao = styled.button`
-	background-color: #A328D6;
+background-color: #D9BF57;
     margin-top: 20px;
     width: 100%;
     height: 46px;
-    border-radius: 4.63636px;
+    border-radius: 100px;
     h2{
         color: white;
     }
