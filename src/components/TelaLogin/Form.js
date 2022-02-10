@@ -27,7 +27,7 @@ export default function Form(){
                 console.log(response.data)
                 setToken(response.data.token);
                 setEndereco(response.data.endereco);
-                navigate('/inicio');
+                navigate('/bebidas');
             }
             else{
                 alert('E-mail ou senha inválidos!');
