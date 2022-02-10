@@ -83,6 +83,7 @@ export default function Header() {
 const Container = styled.div`
     display: flex;
     flex-direction: column;
+    background-color: #FFFFFF;
 
     position: fixed;
     top: 0;
@@ -90,6 +91,7 @@ const Container = styled.div`
     
     width: 100%;
     padding: 10px;
+    z-index: 100;
 `
 
 const CaixaSuperior = styled.div`
