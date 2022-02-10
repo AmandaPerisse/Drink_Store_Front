@@ -27,7 +27,7 @@ function App() {
         <Routes>
             <Route path="/" element={<Login/>}></Route>
             <Route path="/cadastro" element={<Cadastro/>}></Route>
-            <Route path="/inicio" element={<Inicio/>}></Route>
+            <Route path="/bebidas" element={<Inicio/>}></Route>
             <Route path="/carrinho" element={<Carrinho/>}></Route>
             <Route path="/pedidos-anteriores" element={<PedidosAnteriores/>}></Route>
         </Routes>

@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import LogoMini from '../LogoMini/LogoMini'
@@ -11,9 +11,13 @@ import { caminhosSemHeaderFooter } from '../../App';
 
 export default function Header() {
     const location = useLocation();
+    const [botaoCerveja, setCerveja] = useState(false);
+    const [botaoVinho, setVinho] = useState(false);
+    const [botaoDestilado, setDestilado] = useState(false);
+    const [botaoDrink, setDrink] = useState(false);
 
     if (caminhosSemHeaderFooter.includes(location.pathname)) {
-     return null;
+        return null;
     }
 
     return (
@@ -23,19 +27,51 @@ export default function Header() {
                 <h3>Rua Fulaninho de Tal, 33</h3>
             </CaixaSuperior>
             <Botoes>
-                <Botao>
+                <Botao
+                    selecionado={botaoCerveja}
+                    onClick={() => {
+                        setCerveja(true)
+                        setVinho(false)
+                        setDestilado(false)
+                        setDrink(false)
+                    }}
+                >
                     <img src={cerveja} alt="cerveja"></img>
                     <span>Cervejas</span>
                 </Botao>
-                <Botao>
+                <Botao
+                    selecionado={botaoVinho}
+                    onClick={() => {
+                        setCerveja(false)
+                        setVinho(true)
+                        setDestilado(false)
+                        setDrink(false)
+                    }}
+                >
                     <img src={vinho} alt="vinho"></img>
                     <span>Vinhos</span>
                 </Botao>
-                <Botao>
+                <Botao
+                    selecionado={botaoDestilado}
+                    onClick={() => {
+                        setCerveja(false)
+                        setVinho(false)
+                        setDestilado(true)
+                        setDrink(false)
+                    }}
+                >
                     <img src={drink} alt="destilado"></img>
                     <span>Destilados</span>
                 </Botao>
-                <Botao>
+                <Botao
+                    selecionado={botaoDrink}
+                    onClick={() => {
+                        setCerveja(false)
+                        setVinho(false)
+                        setDestilado(false)
+                        setDrink(true)
+                    }}
+                >
                     <img src={semalcool} alt="drinks"></img>
                     <span>Drinks</span>
                 </Botao>

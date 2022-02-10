@@ -1,48 +1,56 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import inicio from './IconesFooter/inicio.png';
 import pedidos from './IconesFooter/pedidos.png';
 import carrinho from './IconesFooter/carrinho.png';
 import { caminhosSemHeaderFooter } from '../../App';
 
 export default function Footer() {
-    const navigate = useNavigate();
     const location = useLocation();
-
-    const [botoes, setBotoes] = useState([
-        { to: "/inicio", img: inicio, selecionado: false, id:0 },
-        { to: "/pedidos-anteriores", img: pedidos, selecionado: false, id:1 },
-        { to: "/carrinho", img: carrinho, selecionado: false, id:2 }
-    ])
+    const [botaoInicio, setInicio] = useState(true);
+    const [botaoPedidos, setPedidos] = useState(false);
+    const [botaoCarrinho, setCarrinho] = useState(false);
 
     if (caminhosSemHeaderFooter.includes(location.pathname)) {
      return null;
     }
 
-    function selPagina({to, id, selecionado}) {
-        const objBotoes = [...botoes];
-
-        if(selecionado===false) {
-            objBotoes[id].selecionado = true
-        } else {
-            objBotoes[id].selecionado = false
-        }
-        
-        setBotoes(objBotoes);
-        navigate(to)
-    }
-
     return (
         <Container>
-            {botoes.map(botao => 
-            <Botao 
-                to={botao.to} 
-                selecionado={botao.selecionado}
-                onClick={() => selPagina(botao)}
+            <Botao
+                to="/bebidas"
+                selecionado={botaoInicio}
+                onClick={() => {
+                    setInicio(true)
+                    setPedidos(false)
+                    setCarrinho(false)
+                }}
             >
-                <img src={botao.img} alt="" />
-            </Botao>)}
+                <img src={inicio} alt="" />
+            </Botao>
+            <Botao
+                to="/pedidos-anteriores"
+                selecionado={botaoPedidos}
+                onClick={() => {
+                    setInicio(false)
+                    setPedidos(true)
+                    setCarrinho(false)
+                }}
+            >
+                <img src={pedidos} alt="" />
+            </Botao>
+            <Botao
+                to="carrinho"
+                selecionado={botaoCarrinho}
+                onClick={() => {
+                    setInicio(false)
+                    setPedidos(false)
+                    setCarrinho(true)
+                }}
+            >
+                <img src={carrinho} alt="" />
+            </Botao>
         </Container>
     )
 }
@@ -61,7 +69,7 @@ const Container = styled.div`
     left: 0;
 `;
 
-const Botao = styled.div`
+const Botao = styled(Link)`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -69,4 +77,9 @@ const Botao = styled.div`
     padding: 13px;
     ${props => props.selecionado === true && 'border-top: 3px solid white;'};
     ${props => props.selecionado === true && 'border-bottom: 3px solid white;'}
+
+    img {
+        width: 19px;
+        height: 18px;
+    }
 `

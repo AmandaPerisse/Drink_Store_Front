@@ -8,12 +8,13 @@ const Botao = styled.div`
     align-items: center;
     justify-content: space-around;
 
-    background: #4720D4;
+    background: ${props => props.selecionado === true ? '#FFFFFF' : '#4720D4'};
+    border: ${props => props.selecionado === true && '1px solid #4720D4'};
     border-radius: 5px;
 
     span {
         font-size: 14px;
-        color: #FFFFFF;
+        color: ${props => props.selecionado === true ? '#4720D4' : '#FFFFFF'};
     }
 
     img {
