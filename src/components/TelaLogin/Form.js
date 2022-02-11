@@ -6,8 +6,8 @@ import UserContext from '../contexts/UserContext';
 
 export default function Form(){
 
-    const {token, setToken} = useContext(UserContext);
-    const {endereco, setEndereco} = useContext(UserContext);
+    const { setToken } = useContext(UserContext);
+    const { setEndereco } = useContext(UserContext);
     const [email, setEmail] = React.useState('');
     const [senha, setSenha] = React.useState('');
 
@@ -24,10 +24,10 @@ export default function Form(){
                 senha: senha
             });
             if(response.data){
-                console.log(response.data)
                 setToken(response.data.token);
                 setEndereco(response.data.endereco);
                 navigate('/bebidas');
+                console.log(response.data)
             }
             else{
                 alert('E-mail ou senha inválidos!');

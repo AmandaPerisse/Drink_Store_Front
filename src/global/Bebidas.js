@@ -9,6 +9,9 @@ const Bebidas = styled.div`
 
 const Bebida = styled.div`
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     flex-shrink: 0;
 
     height: 220px;

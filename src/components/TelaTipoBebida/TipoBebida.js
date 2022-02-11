@@ -1,19 +1,20 @@
-import React, { useEffect } from 'react';
-import { useContext, useState } from 'react'
+import { useEffect, useContext, useState } from 'react';
+import { useLocation } from 'react-router';
 import axios from 'axios';
 import UserContext from '../contexts/UserContext';
 import styled from 'styled-components';
 import Titulo from '../../global/Titulo';
 import { Bebidas, Bebida } from '../../global/Bebidas';
 
-export default function Inicio() {
+export default function TipoBebida() {
     const { token } = useContext(UserContext);
+    const { state } = useLocation();
     const [info, setInfo] = useState([]);
     const [isLoading, setIsLoading] = useState(true)
     
-    async function carregarBebidas() {
+    async function carregarBebida() {
         try {
-            const infoBebidas = await axios.get('http://localhost:5000/bebidas', { 
+            const infoBebidas = await axios.get(`http://localhost:5000/bebidas/${state.tipo}`, { 
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -25,7 +26,7 @@ export default function Inicio() {
         }
     }
 
-    useEffect(() => carregarBebidas(), [])
+    useEffect(() => carregarBebida(), [])
 
     if (isLoading) {
         return (
@@ -39,7 +40,7 @@ export default function Inicio() {
         <Container>
             <Titulo>
                 <div className="barra"></div>
-                <h1>Cervejas</h1>
+                <h1>{state.tipo}s</h1>
             </Titulo>
             <Bebidas>
                 <Bebida>
@@ -47,27 +48,6 @@ export default function Inicio() {
                     <p>{info[0].nome}</p>
                     <span>R$ {info[0].valor}</span>
                 </Bebida>
-            </Bebidas>
-            <Titulo>
-                <div className="barra"></div>
-                <h1>Vinhos</h1>
-            </Titulo>
-            <Bebidas>
-                <Bebida/>
-            </Bebidas>
-            <Titulo>
-                <div className="barra"></div>
-                <h1>Destilados</h1>
-            </Titulo>
-            <Bebidas>
-                <Bebida/>
-            </Bebidas>
-            <Titulo>
-                <div className="barra"></div>
-                <h1>Drinks</h1>
-            </Titulo>
-            <Bebidas>
-                <Bebida/>
             </Bebidas>
         </Container>
     )
@@ -80,4 +60,3 @@ const Container = styled.div`
     padding: 118px 10px 60px;
     overflow-y: scroll;
 `
-

@@ -7,6 +7,7 @@ import './styles/style.css';
 import Login from './components/TelaLogin/Login';
 import Cadastro from './components/TelaCadastro/Cadastro';
 import Inicio from './components/TelaInicial/Inicio';
+import TipoBebida from './components/TelaTipoBebida/TipoBebida';
 import PedidosAnteriores from './components/TelaPedidosAnteriores/PedidosAnteriores';
 import Carrinho from './components/TelaCarrinho/Carrinho';
 import Header from './global/Header/Header';
@@ -18,16 +19,18 @@ function App() {
   const [token, setToken] = React.useState('');
   const [endereco, setEndereco] = React.useState('');
   const [carrinho, setCarrinho] = React.useState([]);
+  const [tipo, setTipo] = React.useState('');
 
   return (
     
     <BrowserRouter>
-      <UserContext.Provider value = {{token, setToken, endereco, setEndereco, carrinho, setCarrinho}}>
+      <UserContext.Provider value = {{token, setToken, endereco, setEndereco, carrinho, setCarrinho, tipo, setTipo}}>
         <Header/>
         <Routes>
             <Route path="/" element={<Login/>}></Route>
             <Route path="/cadastro" element={<Cadastro/>}></Route>
             <Route path="/bebidas" element={<Inicio/>}></Route>
+            <Route path="/bebidas/:tipo" element={<TipoBebida/>}></Route>
             <Route path="/carrinho" element={<Carrinho/>}></Route>
             <Route path="/pedidos-anteriores" element={<PedidosAnteriores/>}></Route>
         </Routes>

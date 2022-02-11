@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useState, useContext } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import LogoMini from '../LogoMini/LogoMini'
 import Botao from './Botao'
@@ -8,13 +8,17 @@ import vinho from './LogoBebidas/vinho.png';
 import drink from './LogoBebidas/drink.png';
 import semalcool from './LogoBebidas/semalcool.png';
 import { caminhosSemHeaderFooter } from '../../App';
+import UserContext from '../../components/contexts/UserContext';
 
 export default function Header() {
     const location = useLocation();
+    const navigate = useNavigate();
     const [botaoCerveja, setCerveja] = useState(false);
     const [botaoVinho, setVinho] = useState(false);
     const [botaoDestilado, setDestilado] = useState(false);
     const [botaoDrink, setDrink] = useState(false);
+    const { endereco } = useContext(UserContext);
+    const { setTipo } = useContext(UserContext);
 
     if (caminhosSemHeaderFooter.includes(location.pathname)) {
         return null;
@@ -24,7 +28,7 @@ export default function Header() {
         <Container>
             <CaixaSuperior>
                 <LogoMini/>
-                <h3>Rua Fulaninho de Tal, 33</h3>
+                <h3>{endereco}</h3>
             </CaixaSuperior>
             <Botoes>
                 <Botao
@@ -34,6 +38,7 @@ export default function Header() {
                         setVinho(false)
                         setDestilado(false)
                         setDrink(false)
+                        navigate("/bebidas/Cerveja", {state: {tipo: "Cerveja"}})
                     }}
                 >
                     <img src={cerveja} alt="cerveja"></img>
@@ -46,6 +51,7 @@ export default function Header() {
                         setVinho(true)
                         setDestilado(false)
                         setDrink(false)
+                        navigate("/bebidas/Vinho", {state: {tipo: "Vinho"}})
                     }}
                 >
                     <img src={vinho} alt="vinho"></img>
@@ -58,6 +64,7 @@ export default function Header() {
                         setVinho(false)
                         setDestilado(true)
                         setDrink(false)
+                        navigate("/bebidas/Destilado", {state: {tipo: "Destilado"}})
                     }}
                 >
                     <img src={drink} alt="destilado"></img>
@@ -70,6 +77,7 @@ export default function Header() {
                         setVinho(false)
                         setDestilado(false)
                         setDrink(true)
+                        navigate("/bebidas/Drink", {state: {tipo: "Drink"}})
                     }}
                 >
                     <img src={semalcool} alt="drinks"></img>
