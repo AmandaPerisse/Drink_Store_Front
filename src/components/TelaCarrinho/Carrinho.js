@@ -47,8 +47,6 @@ export default function Carrinho() {
                 }
             );
             promise.then(response => {
-                console.log("oi2")
-                console.log(response.data);
                 if(response.data){
                     setToken(response.data.token);
                     alert("Obrigado por favor o pedido! Seu pedido já está sendo preparado e logo sairá para a entrega.");
@@ -58,14 +56,11 @@ export default function Carrinho() {
             });
         }
         catch(e){
-            console.log("oi3")
             if(e.response.status === 401){
-                console.log("oi5")
                 alert('Por favor, logue novamente.');
                 navigate('/');
             }
             else{
-                console.log("oi4")
                 alert('Falha.');
             }
         }
