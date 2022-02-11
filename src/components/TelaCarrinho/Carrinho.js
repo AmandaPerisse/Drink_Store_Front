@@ -9,8 +9,8 @@ export default function Carrinho() {
     const {token, setToken} = useContext(UserContext);
     //const {carrinho, setCarrinho} = useContext(UserContext);
     let carrinho = [{
-        nomeBebida: "Brahma Chopp 473ml",
-        preco: "3.89",
+        nomeBebida: "Destilado 1",
+        preco: "10.10",
         qtd: 3
     }, {
         nomeBebida: "Vinho 1",
@@ -35,27 +35,24 @@ export default function Carrinho() {
          setSomador(soma);
     }, []);
     function confirmarPedido(){
-        try{
-            console.log("oi1")
-            const promise = axios.post('http://localhost:5000/carrinho', {
-                itens: carrinho,
-                total: somador,
-                }, {
-                    headers: {
-                        "Authorization": `Bearer ${token}`
-                    }
+        const promise = axios.post('http://localhost:5000/carrinho', {
+            itens: carrinho,
+            total: somador,
+            }, {
+                headers: {
+                    "Authorization": `Bearer ${token}`
                 }
-            );
-            promise.then(response => {
-                if(response.data){
-                    setToken(response.data.token);
-                    alert("Obrigado por favor o pedido! Seu pedido já está sendo preparado e logo sairá para a entrega.");
-                    //setCarrinho([]);
-                    navigate('/bebidas');
-                }
-            });
-        }
-        catch(e){
+            }
+        );
+        promise.then(response => {
+            if(response.data){
+                setToken(response.data.token);
+                alert("Obrigado por favor o pedido! Seu pedido já está sendo preparado e logo sairá para a entrega.");
+                //setCarrinho([]);
+                navigate('/bebidas');
+            }
+        });
+        promise.catch(e => {
             if(e.response.status === 401){
                 alert('Por favor, logue novamente.');
                 navigate('/');
@@ -63,7 +60,7 @@ export default function Carrinho() {
             else{
                 alert('Falha.');
             }
-        }
+        });
     }
     function cancelarPedido(){
         //setCarrinho([]);

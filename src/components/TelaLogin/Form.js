@@ -24,7 +24,6 @@ export default function Form(){
                 senha: senha
             });
             if(response.data){
-                console.log(response.data)
                 setToken(response.data.token);
                 setEndereco(response.data.endereco);
                 navigate('/bebidas');
