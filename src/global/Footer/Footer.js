@@ -4,6 +4,7 @@ import { useLocation, Link } from 'react-router-dom';
 import inicio from './IconesFooter/inicio.png';
 import pedidos from './IconesFooter/pedidos.png';
 import carrinho from './IconesFooter/carrinho.png';
+import pesquisar from './IconesFooter/procurar.png';
 import { caminhosSemHeaderFooter } from '../../App';
 
 export default function Footer() {
@@ -11,6 +12,7 @@ export default function Footer() {
     const [botaoInicio, setInicio] = useState(true);
     const [botaoPedidos, setPedidos] = useState(false);
     const [botaoCarrinho, setCarrinho] = useState(false);
+    const [botaoPesquisar, setPesquisar] = useState(false);
 
     if (caminhosSemHeaderFooter.includes(location.pathname)) {
      return null;
@@ -25,9 +27,22 @@ export default function Footer() {
                     setInicio(true)
                     setPedidos(false)
                     setCarrinho(false)
+                    setPesquisar(false)
                 }}
             >
                 <img src={inicio} alt="" />
+            </Botao>
+            <Botao
+                to="/pesquisar"
+                selecionado={botaoCarrinho}
+                onClick={() => {
+                    setInicio(false)
+                    setPedidos(false)
+                    setCarrinho(false)
+                    setPesquisar(true)
+                }}
+            >
+                <img src={pesquisar} alt="" />
             </Botao>
             <Botao
                 to="/pedidos-anteriores"
@@ -36,6 +51,7 @@ export default function Footer() {
                     setInicio(false)
                     setPedidos(true)
                     setCarrinho(false)
+                    setPesquisar(false)
                 }}
             >
                 <img src={pedidos} alt="" />
@@ -47,6 +63,7 @@ export default function Footer() {
                     setInicio(false)
                     setPedidos(false)
                     setCarrinho(true)
+                    setPesquisar(false)
                 }}
             >
                 <img src={carrinho} alt="" />
