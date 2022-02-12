@@ -7,7 +7,7 @@ const Bebidas = styled.div`
     overflow-x: scroll;
 `
 
-const Bebida = styled.div`
+const Bebida = styled.button`
     display: flex;
     flex-direction: column;
     align-items: center;

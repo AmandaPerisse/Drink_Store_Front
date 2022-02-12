@@ -20,6 +20,7 @@ function App() {
   const [endereco, setEndereco] = React.useState('');
   const [carrinho, setCarrinho] = React.useState([]);
   const [tipo, setTipo] = React.useState('');
+  console.log(carrinho)
 
   return (
     

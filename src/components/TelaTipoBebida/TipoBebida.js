@@ -5,6 +5,7 @@ import UserContext from '../contexts/UserContext';
 import styled from 'styled-components';
 import Titulo from '../../global/Titulo';
 import { Bebidas, Bebida } from '../../global/Bebidas';
+import Swal from 'sweetalert2';
 
 export default function TipoBebida() {
     const { token } = useContext(UserContext);
@@ -26,7 +27,25 @@ export default function TipoBebida() {
         }
     }
 
-    useEffect(() => carregarBebida(), [])
+    async function escolherQte(nomeBebida, preco) {
+        const compras = [];
+
+        const { value: qtd } = await Swal.fire({ title: "Selecionar quantidade",
+                    input: "number",
+                    confirmButtonText: 'Adicionar ao carrinho',
+                    showCancelButton: true,
+                    cancelButtonText: 'Cancelar',
+                    inputAttributes: {
+                        min: 0,
+                        max: 100,
+                        step: 1
+                    },
+                    inputValue: ""
+        })
+        compras.push({nomeBebida, preco, qtd})
+    }
+
+    useEffect(() => carregarBebida(), [state.tipo])
 
     if (isLoading) {
         return (
@@ -43,11 +62,13 @@ export default function TipoBebida() {
                 <h1>{state.tipo}s</h1>
             </Titulo>
             <Bebidas>
-                <Bebida>
-                    <img src={info[0].img} alt={info[0].nome}/>
-                    <p>{info[0].nome}</p>
-                    <span>R$ {info[0].valor}</span>
-                </Bebida>
+                {info.map(bebida =>
+                    <Bebida onClick={() => escolherQte(bebida.nome, bebida.valor)}>
+                        <img src={bebida.img} alt={bebida.nome}/>
+                        <p>{bebida.nome}</p>
+                        <span>R$ {bebida.valor}</span>
+                    </Bebida>
+                )}
             </Bebidas>
         </Container>
     )

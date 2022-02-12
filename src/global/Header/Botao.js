@@ -3,6 +3,7 @@ import styled from 'styled-components';
 const Botao = styled.div`
     width: 110px;
     height: 40px;
+    cursor: pointer;
 
     display: flex;
     align-items: center;

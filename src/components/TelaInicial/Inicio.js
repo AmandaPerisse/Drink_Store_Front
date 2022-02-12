@@ -19,7 +19,7 @@ export default function Inicio() {
                 }
             });
             setInfo(infoBebidas.data);
-            setIsLoading(false)
+            setIsLoading(false);
         } catch (e) {
             console.error(e)
         }
@@ -42,32 +42,56 @@ export default function Inicio() {
                 <h1>Cervejas</h1>
             </Titulo>
             <Bebidas>
-                <Bebida>
-                    <img src={info[0].img} alt={info[0].nome}/>
-                    <p>{info[0].nome}</p>
-                    <span>R$ {info[0].valor}</span>
-                </Bebida>
+                {info.filter(bebida => bebida.tipo === 'Cerveja')
+                    .map(bebida =>
+                    <Bebida>
+                        <img src={bebida.img} alt={bebida.nome}/>
+                        <p>{bebida.nome}</p>
+                        <span>R$ {bebida.valor}</span>
+                    </Bebida>
+                )}
             </Bebidas>
             <Titulo>
                 <div className="barra"></div>
                 <h1>Vinhos</h1>
             </Titulo>
             <Bebidas>
-                <Bebida/>
+                {info.filter(bebida => bebida.tipo === 'Vinho')
+                    .map(bebida =>
+                    <Bebida>
+                        <img src={bebida.img} alt={bebida.nome}/>
+                        <p>{bebida.nome}</p>
+                        <span>R$ {bebida.valor}</span>
+                    </Bebida>
+                )}
             </Bebidas>
             <Titulo>
                 <div className="barra"></div>
                 <h1>Destilados</h1>
             </Titulo>
             <Bebidas>
-                <Bebida/>
+                {info.filter(bebida => bebida.tipo === 'Destilado')
+                    .map(bebida =>
+                    <Bebida>
+                        <img src={bebida.img} alt={bebida.nome}/>
+                        <p>{bebida.nome}</p>
+                        <span>R$ {bebida.valor}</span>
+                    </Bebida>
+                )}
             </Bebidas>
             <Titulo>
                 <div className="barra"></div>
                 <h1>Drinks</h1>
             </Titulo>
             <Bebidas>
-                <Bebida/>
+                {info.filter(bebida => bebida.tipo === 'Drink')
+                    .map(bebida =>
+                    <Bebida>
+                        <img src={bebida.img} alt={bebida.nome}/>
+                        <p>{bebida.nome}</p>
+                        <span>R$ {bebida.valor}</span>
+                    </Bebida>
+                )}
             </Bebidas>
         </Container>
     )

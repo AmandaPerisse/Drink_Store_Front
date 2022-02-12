@@ -18,7 +18,6 @@ export default function Header() {
     const [botaoDestilado, setDestilado] = useState(false);
     const [botaoDrink, setDrink] = useState(false);
     const { endereco } = useContext(UserContext);
-    const { setTipo } = useContext(UserContext);
 
     if (caminhosSemHeaderFooter.includes(location.pathname)) {
         return null;
