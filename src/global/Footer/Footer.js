@@ -1,16 +1,18 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import styled from 'styled-components';
 import { useLocation, Link } from 'react-router-dom';
 import inicio from './IconesFooter/inicio.png';
 import pedidos from './IconesFooter/pedidos.png';
 import carrinho from './IconesFooter/carrinho.png';
 import { caminhosSemHeaderFooter } from '../../App';
+import UserContext from '../../components/contexts/UserContext';
 
 export default function Footer() {
     const location = useLocation();
     const [botaoInicio, setInicio] = useState(true);
     const [botaoPedidos, setPedidos] = useState(false);
     const [botaoCarrinho, setCarrinho] = useState(false);
+    const { setTipo } = useContext(UserContext);
 
     if (caminhosSemHeaderFooter.includes(location.pathname)) {
      return null;
@@ -25,6 +27,7 @@ export default function Footer() {
                     setInicio(true)
                     setPedidos(false)
                     setCarrinho(false)
+                    setTipo("bebidas")
                 }}
             >
                 <img src={inicio} alt="" />

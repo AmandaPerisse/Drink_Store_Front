@@ -5,11 +5,16 @@ import UserContext from '../contexts/UserContext';
 import styled from 'styled-components';
 import Titulo from '../../global/Titulo';
 import { Bebidas, Bebida } from '../../global/Bebidas';
+import Swal from 'sweetalert2';
 
 export default function Inicio() {
-    const { token } = useContext(UserContext);
     const [info, setInfo] = useState([]);
-    const [isLoading, setIsLoading] = useState(true)
+    const [isLoading, setIsLoading] = useState(true);
+    const [compras, setCompras] = useState([]);
+    const { carrinho, token, setCarrinho, tipo } = useContext(UserContext);
+    setCarrinho(compras);
+
+    useEffect(() => carregarBebidas(), []);
     
     async function carregarBebidas() {
         try {
@@ -23,9 +28,34 @@ export default function Inicio() {
         } catch (e) {
             console.error(e)
         }
-    }
+    };
 
-    useEffect(() => carregarBebidas(), [])
+    async function escolherQte(nomeBebida, preco) {
+        const { value: quantidade } = await Swal.fire({ title: "Selecionar quantidade",
+                    input: "number",
+                    confirmButtonText: 'Adicionar ao carrinho',
+                    showCancelButton: true,
+                    cancelButtonText: 'Cancelar',
+                    inputAttributes: {
+                        min: 0,
+                        max: 100,
+                        step: 1
+                    },
+                    inputValue: ""
+        });
+
+        const qtd = parseInt(quantidade)
+        const carrinhoUnico = [...carrinho];
+        const bebida = carrinho.find(bebida => bebida.nomeBebida === nomeBebida)
+
+        if (bebida) {
+            carrinhoUnico.find(bebida => bebida.nomeBebida === nomeBebida).qtd += qtd;
+            setCompras(carrinhoUnico);
+            return;
+        }
+
+        setCompras([...compras, {nomeBebida, preco, qtd}]);
+    };
 
     if (isLoading) {
         return (
@@ -33,60 +63,82 @@ export default function Inicio() {
                 Carregando...
             </h1>
         )
-    }
+    };
 
-    return (
+    if (tipo === "bebidas") {
+        return (
+            <Container>
+                <Titulo>
+                    <div className="barra"></div>
+                    <h1>Cervejas</h1>
+                </Titulo>
+                <Bebidas>
+                    {info.filter(bebida => bebida.tipo === "Cerveja")
+                        .map(bebida =>
+                        <Bebida onClick={() => escolherQte(bebida.nome, bebida.valor)}>
+                            <img src={bebida.img} alt={bebida.nome}/>
+                            <p>{bebida.nome}</p>
+                            <span>R$ {bebida.valor}</span>
+                        </Bebida>
+                    )}
+                </Bebidas>
+                <Titulo>
+                    <div className="barra"></div>
+                    <h1>Vinhos</h1>
+                </Titulo>
+                <Bebidas>
+                    {info.filter(bebida => bebida.tipo === 'Vinho')
+                        .map(bebida =>
+                        <Bebida onClick={() => escolherQte(bebida.nome, bebida.valor)}>
+                            <img src={bebida.img} alt={bebida.nome}/>
+                            <p>{bebida.nome}</p>
+                            <span>R$ {bebida.valor}</span>
+                        </Bebida>
+                    )}
+                </Bebidas>
+                <Titulo>
+                    <div className="barra"></div>
+                    <h1>Destilados</h1>
+                </Titulo>
+                <Bebidas>
+                    {info.filter(bebida => bebida.tipo === 'Destilado')
+                        .map(bebida =>
+                        <Bebida onClick={() => escolherQte(bebida.nome, bebida.valor)}>
+                            <img src={bebida.img} alt={bebida.nome}/>
+                            <p>{bebida.nome}</p>
+                            <span>R$ {bebida.valor}</span>
+                        </Bebida>
+                    )}
+                </Bebidas>
+                <Titulo>
+                    <div className="barra"></div>
+                    <h1>Drinks</h1>
+                </Titulo>
+                <Bebidas>
+                    {info.filter(bebida => bebida.tipo === 'Drink')
+                        .map(bebida =>
+                        <Bebida onClick={() => escolherQte(bebida.nome, bebida.valor)}>
+                            <img src={bebida.img} alt={bebida.nome}/>
+                            <p>{bebida.nome}</p>
+                            <span>R$ {bebida.valor}</span>
+                        </Bebida>
+                    )}
+                </Bebidas>
+            </Container>
+        )
+    };
+
+    if (tipo !== "bebidas") {
+        return (
         <Container>
             <Titulo>
                 <div className="barra"></div>
-                <h1>Cervejas</h1>
+                <h1>{tipo}s</h1>
             </Titulo>
             <Bebidas>
-                {info.filter(bebida => bebida.tipo === 'Cerveja')
+                {info.filter(bebida => bebida.tipo === tipo)
                     .map(bebida =>
-                    <Bebida>
-                        <img src={bebida.img} alt={bebida.nome}/>
-                        <p>{bebida.nome}</p>
-                        <span>R$ {bebida.valor}</span>
-                    </Bebida>
-                )}
-            </Bebidas>
-            <Titulo>
-                <div className="barra"></div>
-                <h1>Vinhos</h1>
-            </Titulo>
-            <Bebidas>
-                {info.filter(bebida => bebida.tipo === 'Vinho')
-                    .map(bebida =>
-                    <Bebida>
-                        <img src={bebida.img} alt={bebida.nome}/>
-                        <p>{bebida.nome}</p>
-                        <span>R$ {bebida.valor}</span>
-                    </Bebida>
-                )}
-            </Bebidas>
-            <Titulo>
-                <div className="barra"></div>
-                <h1>Destilados</h1>
-            </Titulo>
-            <Bebidas>
-                {info.filter(bebida => bebida.tipo === 'Destilado')
-                    .map(bebida =>
-                    <Bebida>
-                        <img src={bebida.img} alt={bebida.nome}/>
-                        <p>{bebida.nome}</p>
-                        <span>R$ {bebida.valor}</span>
-                    </Bebida>
-                )}
-            </Bebidas>
-            <Titulo>
-                <div className="barra"></div>
-                <h1>Drinks</h1>
-            </Titulo>
-            <Bebidas>
-                {info.filter(bebida => bebida.tipo === 'Drink')
-                    .map(bebida =>
-                    <Bebida>
+                    <Bebida onClick={() => escolherQte(bebida.nome, bebida.valor)}>
                         <img src={bebida.img} alt={bebida.nome}/>
                         <p>{bebida.nome}</p>
                         <span>R$ {bebida.valor}</span>
@@ -95,6 +147,7 @@ export default function Inicio() {
             </Bebidas>
         </Container>
     )
+    };
 }
 
 const Container = styled.div`
