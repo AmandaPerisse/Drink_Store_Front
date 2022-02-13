@@ -17,7 +17,7 @@ export default function Form({ setListaBebidas }){
     
     function pesquisando(e){
         e.preventDefault();
-        const promise = axios.get('http://localhost:5000/pesquisar', {
+        const promise = axios.post('http://localhost:5000/pesquisar', {
             pesquisa: campoPesquisa
             }, {
                 headers: {

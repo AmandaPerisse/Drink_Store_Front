@@ -10,18 +10,36 @@ export default function PedidosAnteriores() {
     const navigate = useNavigate();
     //const {carrinho, setCarrinho} = useContext(UserContext);
 
+    function Bebidas(){
+        let cont = 0;
+        if (listaBebidas.length > 0){
+            return (
+                listaBebidas.map(bebida => {
+                    cont ++;
+                    return(
+                        <Bebida key = {cont}>
+                            <img src = {bebida.img} alt = "Imagem"/>
+                            <div>
+                                <h4>{bebida.nome}</h4>
+                                <h4>R$ {bebida.valor}</h4>
+                            </div>
+                        </Bebida>
+                    )
+                    
+                })
+            )
+        }
+        else{
+            return null;
+        }
+    }
+
     return (
         <Container>
-            <Form lista = {setListaBebidas} />
-            <Bebidas>
-                <Bebida>
-                    <div>Foto</div>
-                    <div>
-                        <h4>Nome bebida</h4>
-                        <h4>Valor</h4>
-                    </div>
-                </Bebida>
-            </Bebidas>
+            <Form setListaBebidas = {setListaBebidas} />
+            <BebidasCompleto>
+                <Bebidas />
+            </BebidasCompleto>
         </Container>
     )
 }
@@ -31,41 +49,7 @@ const Container = styled.div`
     margin-top: 115px;
     margin-bottom: 40px;  
 `
-const Pedidos = styled.div`
-    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-    border-radius: 5px;
-    width: 100%;   
-    border: 1px solid #eee;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 40px 10px;
-    overflow-y: auto;
-    margin-bottom: 20px;
-`
-const Item = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center; 
-    margin: 5px 0px;
-`
-const Saldo = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center; 
-    margin-top: 30px;
-`
-const Botao = styled.button`
-	background-color: #D9BF57;
-    margin-top: 20px;
-    width: 100%;
-    height: 40px;
-    border-radius: 100px;
-    h3{
-        color: white;
-    }
-`;
-const Bebidas = styled.div`
+const BebidasCompleto = styled.div`
     margin: 15px 0;
     display: flex;
     gap: 8px;
