@@ -33,6 +33,18 @@ export default function Footer() {
                 <img src={inicio} alt="" />
             </Botao>
             <Botao
+                to="/pesquisar"
+                selecionado={botaoCarrinho}
+                onClick={() => {
+                    setInicio(false)
+                    setPedidos(false)
+                    setCarrinho(false)
+                    setPesquisar(true)
+                }}
+            >
+                <img src={pesquisar} alt="" />
+            </Botao>
+            <Botao
                 to="/pedidos-anteriores"
                 selecionado={botaoPedidos}
                 onClick={() => {

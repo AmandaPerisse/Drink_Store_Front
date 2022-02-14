@@ -9,6 +9,7 @@ import Cadastro from './components/TelaCadastro/Cadastro';
 import Inicio from './components/TelaInicial/Inicio';
 import PedidosAnteriores from './components/TelaPedidosAnteriores/PedidosAnteriores';
 import Carrinho from './components/TelaCarrinho/Carrinho';
+import Pesquisar from './components/TelaPesquisar/Pesquisar';
 import Header from './global/Header/Header';
 import Footer from './global/Footer/Footer';
 
@@ -28,6 +29,7 @@ function App() {
         <Routes>
             <Route path="/" element={<Login/>}></Route>
             <Route path="/cadastro" element={<Cadastro/>}></Route>
+            <Route path="/pesquisar" element={<Pesquisar/>}></Route>
             <Route path="/bebidas" element={<Inicio/>}></Route>
             <Route path="/carrinho" element={<Carrinho/>}></Route>
             <Route path="/pedidos-anteriores" element={<PedidosAnteriores/>}></Route>
