@@ -32,7 +32,7 @@ export default function Carrinho() {
                 setToken(response.data.token);
                 alert("Obrigado por favor o pedido! Seu pedido já está sendo preparado e logo sairá para a entrega.");
                 //setCarrinho([]);
-                navigate('/bebidas');
+                navigate('/');
             }
         });
         promise.catch(e => {
