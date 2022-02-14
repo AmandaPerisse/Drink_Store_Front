@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import LogoMini from '../LogoMini/LogoMini'
 import Botao from './Botao'
@@ -12,6 +12,7 @@ import UserContext from '../../components/contexts/UserContext';
 
 export default function Header() {
     const location = useLocation();
+    const navigate = useNavigate();
     const [botaoCerveja, setCerveja] = useState(false);
     const [botaoVinho, setVinho] = useState(false);
     const [botaoDestilado, setDestilado] = useState(false);
@@ -37,6 +38,7 @@ export default function Header() {
                         setDestilado(false)
                         setDrink(false)
                         setTipo("Cerveja")
+                        navigate("/bebidas")
                     }}
                 >
                     <img src={cerveja} alt="cerveja"></img>
@@ -50,6 +52,7 @@ export default function Header() {
                         setDestilado(false)
                         setDrink(false)
                         setTipo("Vinho")
+                        navigate("/bebidas")
                     }}
                 >
                     <img src={vinho} alt="vinho"></img>
@@ -63,6 +66,7 @@ export default function Header() {
                         setDestilado(true)
                         setDrink(false)
                         setTipo("Destilado")
+                        navigate("/bebidas")
                     }}
                 >
                     <img src={drink} alt="destilado"></img>
@@ -76,6 +80,7 @@ export default function Header() {
                         setDestilado(false)
                         setDrink(true)
                         setTipo("Drink")
+                        navigate("/bebidas")
                     }}
                 >
                     <img src={semalcool} alt="drinks"></img>

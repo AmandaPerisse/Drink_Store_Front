@@ -10,15 +10,28 @@ import Swal from 'sweetalert2';
 export default function Inicio() {
     const [info, setInfo] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [compras, setCompras] = useState([]);
-    const { carrinho, token, setCarrinho, tipo } = useContext(UserContext);
-    setCarrinho(compras);
+    const { token, tipo, setCarrinho } = useContext(UserContext);
 
-    useEffect(() => carregarBebidas(), []);
+    async function obterCarrinho() {
+        try {
+            const infoCarrinho = await axios.get('https://back-projeto-drink-store.herokuapp.com/carrinho', { 
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            setCarrinho(infoCarrinho.data)
+        } catch (e) {
+            console.log(e);
+        }
+    };
+
+    useEffect(() => 
+        carregarBebidas()
+    , []);
     
     async function carregarBebidas() {
         try {
-            const infoBebidas = await axios.get('http://localhost:5000/bebidas', { 
+            const infoBebidas = await axios.get('https://back-projeto-drink-store.herokuapp.com/bebidas', { 
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -31,30 +44,35 @@ export default function Inicio() {
     };
 
     async function escolherQte(nomeBebida, preco) {
-        const { value: quantidade } = await Swal.fire({ title: "Selecionar quantidade",
+        const { value: quantidade } = await Swal.fire({ 
+                    title: "Selecionar quantidade",
                     input: "number",
                     confirmButtonText: 'Adicionar ao carrinho',
-                    showCancelButton: true,
-                    cancelButtonText: 'Cancelar',
+                    showDenyButton: true,
+                    denyButtonText: 'Cancelar',
                     inputAttributes: {
                         min: 0,
                         max: 100,
                         step: 1
                     },
-                    inputValue: ""
+                    inputValue: "",
         });
 
-        const qtd = parseInt(quantidade)
-        const carrinhoUnico = [...carrinho];
-        const bebida = carrinho.find(bebida => bebida.nomeBebida === nomeBebida)
+        const qtd = parseInt(quantidade);
+        const carrinhoUnico = {nomeBebida, preco, qtd};
 
-        if (bebida) {
-            carrinhoUnico.find(bebida => bebida.nomeBebida === nomeBebida).qtd += qtd;
-            setCompras(carrinhoUnico);
-            return;
+        if (quantidade === false) return;
+
+        try {
+            axios.post('https://back-projeto-drink-store.herokuapp.com/carrinho', carrinhoUnico, {
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            })
+            obterCarrinho();
+        } catch (e) {
+            console.log(e)
         }
-
-        setCompras([...compras, {nomeBebida, preco, qtd}]);
     };
 
     if (isLoading) {

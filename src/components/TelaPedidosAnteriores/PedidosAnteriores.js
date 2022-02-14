@@ -12,7 +12,7 @@ export default function PedidosAnteriores() {
     //const {carrinho, setCarrinho} = useContext(UserContext);
 
     useEffect(() => {
-        const promise = axios.get('http://localhost:5000/pedidos-anteriores', {
+        const promise = axios.get('https://back-projeto-drink-store.herokuapp.com/pedidos-anteriores', {
                 headers: {
                     "Authorization": `Bearer ${token}`
                 }

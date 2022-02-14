@@ -19,7 +19,7 @@ export default function Form(){
     async function logando(e){
         e.preventDefault();
         try{
-            const response = await axios.post('http://localhost:5000/login', {
+            const response = await axios.post('https://back-projeto-drink-store.herokuapp.com/login', {
                 email: email,
                 senha: senha
             });
