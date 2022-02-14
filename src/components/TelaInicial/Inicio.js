@@ -64,7 +64,7 @@ export default function Inicio() {
         if (quantidade === false) return;
 
         try {
-            axios.post('https://back-projeto-drink-store.herokuapp.com/carrinho', carrinhoUnico, {
+            axios.post('https://back-projeto-drink-store.herokuapp.com/bebidas', carrinhoUnico, {
                 headers: {
                     "Authorization": `Bearer ${token}`
                 }

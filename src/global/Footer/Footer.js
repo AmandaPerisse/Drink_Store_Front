@@ -4,6 +4,7 @@ import { useLocation, Link } from 'react-router-dom';
 import inicio from './IconesFooter/inicio.png';
 import pedidos from './IconesFooter/pedidos.png';
 import iconeCarrinho from './IconesFooter/carrinho.png';
+import pesquisar from './IconesFooter/procurar.png';
 import { caminhosSemHeaderFooter } from '../../App';
 import UserContext from '../../components/contexts/UserContext';
 
@@ -12,6 +13,7 @@ export default function Footer() {
     const [botaoInicio, setInicio] = useState(true);
     const [botaoPedidos, setPedidos] = useState(false);
     const [botaoCarrinho, setBotaoCarrinho] = useState(false);
+    const [botaoPesquisar, setBotaoPesquisar] = useState(false);
     const { setTipo, carrinho } = useContext(UserContext);
 
     if (caminhosSemHeaderFooter.includes(location.pathname)) {
@@ -27,6 +29,7 @@ export default function Footer() {
                     setInicio(true)
                     setPedidos(false)
                     setBotaoCarrinho(false)
+                    setBotaoPesquisar(false)
                     setTipo("bebidas")
                 }}
             >
@@ -34,12 +37,12 @@ export default function Footer() {
             </Botao>
             <Botao
                 to="/pesquisar"
-                selecionado={botaoCarrinho}
+                selecionado={botaoPesquisar}
                 onClick={() => {
                     setInicio(false)
                     setPedidos(false)
-                    setCarrinho(false)
-                    setPesquisar(true)
+                    setBotaoCarrinho(false)
+                    setBotaoPesquisar(true)
                 }}
             >
                 <img src={pesquisar} alt="" />
@@ -51,6 +54,7 @@ export default function Footer() {
                     setInicio(false)
                     setPedidos(true)
                     setBotaoCarrinho(false)
+                    setBotaoPesquisar(false)
                 }}
             >
                 <img src={pedidos} alt="" />
@@ -62,6 +66,7 @@ export default function Footer() {
                     setInicio(false)
                     setPedidos(false)
                     setBotaoCarrinho(true)
+                    setBotaoPesquisar(false)
                 }}
             >
                 <img src={iconeCarrinho} alt="" />
