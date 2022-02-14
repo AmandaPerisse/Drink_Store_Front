@@ -88,7 +88,7 @@ const Botao = styled(Link)`
     }
 
     .quantidade {
-        color: white;
+        color: #A17208;
         position: fixed;
         bottom: 25px;
         right: 45px;
