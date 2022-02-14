@@ -1,21 +1,21 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import styled from 'styled-components';
 import { useLocation, Link } from 'react-router-dom';
 import inicio from './IconesFooter/inicio.png';
 import pedidos from './IconesFooter/pedidos.png';
-import carrinho from './IconesFooter/carrinho.png';
-import pesquisar from './IconesFooter/procurar.png';
+import iconeCarrinho from './IconesFooter/carrinho.png';
 import { caminhosSemHeaderFooter } from '../../App';
+import UserContext from '../../components/contexts/UserContext';
 
 export default function Footer() {
     const location = useLocation();
     const [botaoInicio, setInicio] = useState(true);
     const [botaoPedidos, setPedidos] = useState(false);
-    const [botaoCarrinho, setCarrinho] = useState(false);
-    const [botaoPesquisar, setPesquisar] = useState(false);
+    const [botaoCarrinho, setBotaoCarrinho] = useState(false);
+    const { setTipo, carrinho } = useContext(UserContext);
 
     if (caminhosSemHeaderFooter.includes(location.pathname)) {
-     return null;
+      return null;
     }
 
     return (
@@ -26,8 +26,8 @@ export default function Footer() {
                 onClick={() => {
                     setInicio(true)
                     setPedidos(false)
-                    setCarrinho(false)
-                    setPesquisar(false)
+                    setBotaoCarrinho(false)
+                    setTipo("bebidas")
                 }}
             >
                 <img src={inicio} alt="" />
@@ -50,8 +50,7 @@ export default function Footer() {
                 onClick={() => {
                     setInicio(false)
                     setPedidos(true)
-                    setCarrinho(false)
-                    setPesquisar(false)
+                    setBotaoCarrinho(false)
                 }}
             >
                 <img src={pedidos} alt="" />
@@ -62,11 +61,11 @@ export default function Footer() {
                 onClick={() => {
                     setInicio(false)
                     setPedidos(false)
-                    setCarrinho(true)
-                    setPesquisar(false)
+                    setBotaoCarrinho(true)
                 }}
             >
-                <img src={carrinho} alt="" />
+                <img src={iconeCarrinho} alt="" />
+                {carrinho.length === 0 ? "" : <span className="quantidade">{carrinho.length}</span>}
             </Botao>
         </Container>
     )
@@ -98,5 +97,12 @@ const Botao = styled(Link)`
     img {
         width: 19px;
         height: 18px;
+    }
+
+    .quantidade {
+        color: #A17208;
+        position: fixed;
+        bottom: 25px;
+        right: 45px;
     }
 `

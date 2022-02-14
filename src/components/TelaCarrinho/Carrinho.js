@@ -7,24 +7,7 @@ import axios from 'axios';
 export default function Carrinho() {
 
     const {token, setToken} = useContext(UserContext);
-    //const {carrinho, setCarrinho} = useContext(UserContext);
-    let carrinho = [{
-        nomeBebida: "Destilado 1",
-        preco: "10.10",
-        qtd: 3
-    }, {
-        nomeBebida: "Vinho 1",
-        preco: "10.89",
-        qtd: 10
-    }, {
-        nomeBebida: "Drink 1",
-        preco: "50.89",
-        qtd: 10
-    },{
-        nomeBebida: "Drink 2",
-        preco: "30.50",
-        qtd: 15
-    }];
+    const {carrinho} = useContext(UserContext);
     const [somador, setSomador] = React.useState(0); 
     let soma = 0;
     const navigate = useNavigate();
@@ -35,7 +18,7 @@ export default function Carrinho() {
          setSomador(soma);
     }, []);
     function confirmarPedido(){
-        const promise = axios.post('http://localhost:5000/carrinho', {
+        const promise = axios.post('https://back-projeto-drink-store.herokuapp.com/carrinho', {
             itens: carrinho,
             total: somador,
             }, {

@@ -19,11 +19,12 @@ function App() {
   const [token, setToken] = React.useState('');
   const [endereco, setEndereco] = React.useState('');
   const [carrinho, setCarrinho] = React.useState([]);
+  const [tipo, setTipo] = React.useState("bebidas");
 
   return (
     
     <BrowserRouter>
-      <UserContext.Provider value = {{token, setToken, endereco, setEndereco, carrinho, setCarrinho}}>
+      <UserContext.Provider value = {{token, setToken, endereco, setEndereco, carrinho, setCarrinho, tipo, setTipo}}>
         <Header/>
         <Routes>
             <Route path="/" element={<Login/>}></Route>

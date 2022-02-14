@@ -7,13 +7,15 @@ const Bebidas = styled.div`
     overflow-x: scroll;
 `
 
-const Bebida = styled.div`
+const Bebida = styled.button`
     display: flex;
+    flex-direction: column;
+    justify-content: space-around;
     flex-shrink: 0;
 
     height: 220px;
     width: 142px;
-    padding: 6px;
+    padding: 10px;
     border: 1px solid #C4C4C4;
     border-radius: 5px;
 

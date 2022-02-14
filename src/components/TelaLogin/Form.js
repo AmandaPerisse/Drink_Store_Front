@@ -6,8 +6,8 @@ import UserContext from '../contexts/UserContext';
 
 export default function Form(){
 
-    const {token, setToken} = useContext(UserContext);
-    const {endereco, setEndereco} = useContext(UserContext);
+    const { setToken } = useContext(UserContext);
+    const { setEndereco } = useContext(UserContext);
     const [email, setEmail] = React.useState('');
     const [senha, setSenha] = React.useState('');
 
@@ -19,7 +19,7 @@ export default function Form(){
     async function logando(e){
         e.preventDefault();
         try{
-            const response = await axios.post('http://localhost:5000/login', {
+            const response = await axios.post('https://back-projeto-drink-store.herokuapp.com/login', {
                 email: email,
                 senha: senha
             });
@@ -27,6 +27,7 @@ export default function Form(){
                 setToken(response.data.token);
                 setEndereco(response.data.endereco);
                 navigate('/bebidas');
+                console.log(response.data)
             }
             else{
                 alert('E-mail ou senha inválidos!');

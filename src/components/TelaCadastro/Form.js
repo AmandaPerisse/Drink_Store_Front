@@ -23,7 +23,7 @@ export default function Form(){
         e.preventDefault();
         try{
             if(senha === senhaConfirmar){
-                await axios.post('http://localhost:5000/cadastro', {
+                await axios.post('https://back-projeto-drink-store.herokuapp.com/cadastro', {
                 nome: nome,
                 email: email,
                 endereco: endereco,
